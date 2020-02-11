@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="food.css">
+    <script src="food.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+    <style>
+      #map{
+        position: absolute;
+        left: 16%;
+        top: 56%;
+        height: 210px;
+        width: 700px;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="image" src="images/img1.jpg" alt="">
+
+    <img id="logo" src="images/logo.png" alt="">
+
+    <a id="login" class="btn btn-outline-dark btn-lg" href="#" role="button" data-toggle="modal" data-target="#exampleModal"><strong>Login</strong></a>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Log In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Log In</button>
+</form>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <a id="signup" class="btn btn-dark btn-lg" href="#" role="button">Sign Up</a>
+    <h1 id="name">FoodU</h1>
+
+    <h2 id="quotes">hungry?</h2>
+    <h4 id="talk">Order from your favourite restaurents near you.</h4>
+
+    <form>
+  <div id="location" class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Enter Location">
+    </div>
+
+
+    <div class="col-auto">
+      <button type="submit" class="btn btn-success mb-2">Find</button>
+    </div>
+  </div>
+</form>
+
+<!-- map starts -->
+<div id="map">
+
+</div>
+<script>
+  function initMap(){
+    //Map Options
+    var options = {
+      zoom:10,
+      center:{lat:10.0554,lng: 76.3551}
+    }
+
+    //New Map
+    var map = new google.maps.Map(document.getElementById('map'),options);
+
+    //Add Marker
+    // var marker = new google.maps.Marker({
+    //   position:{lat:10.0261,lng: 76.3125},
+    //   map:map
+    // });
+    //
+
+    addMarker1({lat:10.0554,lng: 76.3551});
+    addMarker2({lat:10.5276,lng: 76.2144});
+    // addMarker({lat:11.0510,lng: 76.0711});
+    addMarker3({lat:11.2588,lng: 75.7804});
+    //Add Marker function
+    function addMarker1(coords){
+      var marker = new google.maps.Marker({
+        position:coords,
+        map:map,
+      });
+      marker.addListener('click',function(){
+        infoWindow1.open(map,marker);
+      });
+    }
+
+    function addMarker2(coords){
+      var marker = new google.maps.Marker({
+        position:coords,
+        map:map,
+      });
+      marker.addListener('click',function(){
+        infoWindow2.open(map,marker);
+      });
+    }
+
+    function addMarker3(coords){
+      var marker = new google.maps.Marker({
+        position:coords,
+        map:map,
+      });
+      marker.addListener('click',function(){
+        infoWindow3.open(map,marker);
+      });
+    }
+
+    var infoWindow1 = new google.maps.InfoWindow({
+      content:'<h1>LoRa 1</h1>'
+    });
+    var infoWindow2 = new google.maps.InfoWindow({
+      content:'<h1>LoRa 2</h1>'
+    });
+    var infoWindow3 = new google.maps.InfoWindow({
+      content:'<h1>LoRa 3</h1>'
+    });
+    //
+
+
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQptqa10s-pziD9T-ECBMO0viTKbTfkWw&callback=initMap">
+</script>
+<!-- map ends -->
+
+
+<div class="border">
+
+</div>
+<div class="cities">
+  <p>Abohar
+Achalpur
+Adilabad
+Adityapur
+Adoni
+Agartala
+Agra
+Ahmedabad
+Ahmednagar
+Ajmer
+Akola
+Akot
+Alappuzha
+Aligarh
+Allahabad
+Alwar
+Amalner
+Ambala
+Ambikapur
+Ambur
+Amravati
+Amreli
+Amritsar
+Amroha
+Anand
+Anantapur
+Ankleshwar
+Arrah
+Asansol
+Ashoknagar
+Aurangabad
+Aurangabad_bihar
+Azamgarh
+Baddi
+Bagalkot
+Bagdogra
+Bahadurgarh
+Bahraich
+Bajpe
+Balaghat
+Ballari
+Ballarpur
+Balrampur
+Balurghat
+Bangalore
+Bangalore-Airport
+Bankura
+Banswara
+Bantwal
+Bapatlachirala
+Baramati
+Baraut
+Bardhaman
+Bardoli
+Bareilly
+Barnala
+Barshi
+Basirhat
+Basti
+Batala
+Bathinda
+Beawar
+Beed
+Begusarai
+Behror
+Belgaum
+Berhampore
+Berhampur
+Bettiah
+Betul
+Bhadrachalam
+Bhadravati
+Bhagalpur
+Bhandara
+Bharabanki
+Bharatpur
+Bharuch
+Bhatapara
+Bhatkal
+Bhavnagar
+Bhilai
+Bhilwara
+Bhimavaram
+Bhind
+Bhiwadi
+Bhiwani
+Bhopal
+Bhubaneswar
+Bhuj
+Bhusawal
+Bidar
+Biharsharif
+Bijapur
+Bijnor
+Bikaner
+Bilaspur
+Bina
+Bodhan-Rural
+Bokaro
+Bongaigaon
+Bongaon
+Botad
+Budaun
+Budhwal
+Bulandshahr
+Buldana
+Bundi
+Burhanpur
+Buxar
+Central-Goa
+Chalakkudy
+Chalisgaon
+Chandigarh
+Chandrapur
+Changanasherry
+Charkhi-Dadri
+Chennai
+Cherthala
+Chhapra
+Chhatarpur
+Chhindwara
+Chikkaballapur
+Chikmagalur
+Chilakaluripet
+Chitradurga
+Chittoor
+Chittorgarh
+Churu
+Coimbatore
+Cuddalore
+Cuttack
+Dabhoi
+Dabra
+Dahod</p>
+
+</div>
+
+<div class="midborder">
+  <img src="https://img.icons8.com/clouds/100/000000/food.png">
+  <img src="https://img.icons8.com/clouds/100/000000/kawaii-taco.png">
+  <img src="https://img.icons8.com/clouds/100/000000/kawaii-french-fries.png">
+  <img src="https://img.icons8.com/clouds/100/000000/meal.png">
+  <img src="https://img.icons8.com/clouds/100/000000/hamburger.png">
+  <img src="https://img.icons8.com/clouds/100/000000/kawaii-sushi.png">
+  <img src="https://img.icons8.com/clouds/100/000000/weber.png">
+
+</div>
+
+<h1 id="sed">FOODU-FOODU-FOODU</h1>
+  </body>
+</html>
